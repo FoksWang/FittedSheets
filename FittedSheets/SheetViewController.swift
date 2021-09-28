@@ -27,6 +27,9 @@ public class SheetViewController: UIViewController {
 	/// Allow pulling below the minimum height and bounce back. Defaults to true.
 	public var allowPullingPastMinHeight = SheetViewController.allowPullingPastMinHeight
     
+    /// Allow dismiss view below the minimum height. Defaults is 0
+    public var dismissOnHeight: CGFloat = 0
+    
     /// The sizes that the sheet will attempt to pin to. Defaults to intrinsic only.
     public var sizes: [SheetSize] = [.intrinsic] {
         didSet {
@@ -409,7 +412,7 @@ public class SheetViewController: UIViewController {
                 
                 let animationDuration = TimeInterval(abs(velocity*0.0002) + 0.2)
                 
-                guard finalHeight > 0 || !self.dismissOnPull else {
+                guard finalHeight > dismissOnHeight || !self.dismissOnPull else {
                     // Dismiss
                     UIView.animate(
                         withDuration: animationDuration,
