@@ -414,20 +414,14 @@ public class SheetViewController: UIViewController {
                 
                 guard finalHeight > dismissOnHeight || !self.dismissOnPull else {
                     // Dismiss
-                    UIView.animate(
-                        withDuration: animationDuration,
-                        delay: 0,
-                        usingSpringWithDamping: self.options.transitionDampening,
-                        initialSpringVelocity: self.options.transitionVelocity,
-                        options: self.options.transitionAnimationOptions,
-                        animations: {
+                    UIView.animate(withDuration: abs(velocity*0.0002) + 0.225, delay: 0, options: .curveEaseIn) {
                         self.contentViewController.view.transform = CGAffineTransform(translationX: 0, y: self.contentViewController.view.bounds.height)
                         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.001)
                         self.transition.setPresentor(percentComplete: 1)
                         self.overlayView.alpha = 0
-                    }, completion: { complete in
+                    } completion: { _ in
                         self.attemptDismiss(animated: false)
-                    })
+                    }
                     return
                 }
                 
