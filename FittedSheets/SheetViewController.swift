@@ -422,7 +422,7 @@ public class SheetViewController: UIViewController {
                         options: self.options.transitionAnimationOptions,
                         animations: {
                         self.contentViewController.view.transform = CGAffineTransform(translationX: 0, y: self.contentViewController.view.bounds.height)
-                        self.view.backgroundColor = UIColor.clear
+                        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.001)
                         self.transition.setPresentor(percentComplete: 1)
                         self.overlayView.alpha = 0
                     }, completion: { complete in
